@@ -7,6 +7,11 @@
 
   <option timestep="0.001" iterations="50" tolerance="1e-10" solver="Newton" jacobian="dense" cone="pyramidal" />
 
+  <extension>
+    <plugin plugin="MujocoTactileSensorRosPlugin"/>
+    <plugin plugin="MujocoRosUtils::ExternalForce"/>
+  </extension>
+
   <default>
     <default class="jvrc1">
       <joint limited="true" damping="0.2" pos="0 0 0" />
@@ -205,6 +210,10 @@
     <!-- pelvis -->
     <body name="PELVIS_S" pos="0 0 1.4">
       <freejoint name="root" />
+      <plugin plugin="MujocoRosUtils::ExternalForce">
+        <config key="topic_name" value="/external_force"/>
+        <config key="vis_scale" value="0.1"/>
+      </plugin>
       <geom class="collision" quat="0.707105 0 0 0.707108" mesh="PELVIS_col" />
       <geom class="visual" quat="0.707105 0 0 0.707108" mesh="PELVIS_vis" material="PELVIS" />
       <inertial pos="-0.01 0 0.034" mass="10" diaginertia="0.08958333333333333 0.08958333333333333 0.11249999999999999" />
@@ -224,6 +233,12 @@
             <joint name="R_HIP_Y" axis="0 0 1" range="-0.523599 0.785398" armature="0.1237" class="jvrc1" />
             <geom class="collision" quat="0.707105 0 0 0.707108" mesh="R_HIP_Y_col" />
             <geom class="visual" quat="0.707105 0 0 0.707108" mesh="R_HIP_Y_vis" material="HIP_Y" />
+            <geom condim="3" group="1" type="box" size="0.06 0.04 0.01" rgba="0.2 0.3 0.5 1"
+                  pos="-0.0577307381928566 0 -0.20450757563611333"
+                  euler="0 1.5242809442976415 0" />
+            <site name="right_thigh_tactile_sensor" type="box" size="0.001 0.001 0.001"
+                  pos="-0.0677307381928566 0 -0.20450757563611333"
+                  euler="0 1.5242809442976415 0" />
             <body name="R_KNEE_S" pos="-0.02 0 -0.389">
               <inertial pos="0.04 0 -0.16" quat="0.707107 0 0 0.707107" mass="3" diaginertia="0.034525 0.031925 0.00865" />
               <joint name="R_KNEE" axis="0 1 0" range="0 2.61799" armature="0.1305" class="jvrc1" />
@@ -240,6 +255,9 @@
                   <geom class="visual" quat="0.707105 0 0 0.707108" mesh="R_ANKLE_P_vis" material="ANKLE" />
                   <!-- site for right foot f/t sensor -->
                   <site name="rf_force" size="0.01" pos="0.0 0.0 0.0" />
+                  <site name="right_foot_tactile_sensor" type="box" size="0.001 0.001 0.001"
+                        pos="0.030310330912470818 -0.001216750591993332 -0.10773589462041855"
+                        euler="0.0 0.0 0.0" />
                 </body>
               </body>
             </body>
@@ -260,12 +278,24 @@
             <joint name="L_HIP_Y" axis="0 0 1" range="-0.785398 0.523599" armature="0.1237" class="jvrc1" />
             <geom class="collision" quat="0.707105 0 0 0.707108" mesh="L_HIP_Y_col" />
             <geom class="visual" quat="0.707105 0 0 0.707108" mesh="L_HIP_Y_vis" material="HIP_Y" />
+            <geom condim="3" group="1" type="box" size="0.06 0.04 0.01" rgba="0.2 0.3 0.5 1"
+                  pos="-0.0577307381928566 0 -0.20450757563611333"
+                  euler="0 1.5242809442976415 0" />
+            <site name="left_thigh_tactile_sensor" type="box" size="0.001 0.001 0.001"
+                  pos="-0.0677307381928566 0 -0.20450757563611333"
+                  euler="0 1.5242809442976415 0" />
             <body name="L_KNEE_S" pos="-0.02 0 -0.389">
               <inertial pos="0.04 0 -0.16" quat="0.707107 0 0 0.707107" mass="3" diaginertia="0.034525 0.031925 0.00865" />
               <joint name="L_KNEE" axis="0 1 0" range="0 2.61799" armature="0.1305" class="jvrc1" />
               <geom class="collision" mesh="L_KNEE_col" />
               <geom class="visual" mesh="L_KNEE1_vis" material="KNEE1" />
               <geom class="visual" mesh="L_KNEE2_vis" material="KNEE2" />
+              <geom condim="3" group="1" type="box" size="0.04 0.04 0.01" rgba="0.2 0.3 0.5 1"
+                    pos="0.1025 -3.042248147844262e-09 -0.1063933713699532"
+                    euler="3.141590255540823 -1.5204375874732723 -3.1415901265290733" />
+              <site name="left_knee_tactile_sensor" type="box" size="0.001 0.001 0.001"
+                    pos="0.11161884184098951 -3.042248147844262e-09 -0.1063933713699532"
+                    euler="3.141590255540823 -1.5204375874732723 -3.1415901265290733" />
               <body name="L_ANKLE_R_S" pos="0.04 0 -0.357">
                 <inertial pos="0 0 0" mass="1" diaginertia="0.00064 0.00064 0.00064" />
                 <joint name="L_ANKLE_R" axis="1 0 0" range="-0.785398 0.610865" armature="0.0653" class="jvrc1" />
@@ -276,6 +306,9 @@
                   <geom class="visual" quat="0.707105 0 0 0.707108" mesh="L_ANKLE_P_vis" material="ANKLE" />
                   <!-- site for left foot f/t sensor -->
                   <site name="lf_force" size="0.01" pos="0.0 0.0 0.0" />
+                  <site name="left_foot_tactile_sensor" type="box" size="0.001 0.001 0.001"
+                        pos="0.030310330912470818 -0.001216750591993332 -0.10773589462041855"
+                        euler="0.0 0.0 0.0" />
                 </body>
               </body>
             </body>
@@ -297,6 +330,7 @@
             <geom class="collision" mesh="WAIST_R_col" />
             <geom class="visual" mesh="WAIST_R_F_vis" material="WAIST_R_F" />
             <geom class="visual" mesh="WAIST_R_R_vis" material="WAIST_R_R" />
+            <site name="back_tactile_sensor" type="box" size="0.001 0.001 0.001" pos="-0.075 0.0 0.2" euler="0.0 1.44 0.0" />
             <!-- head -->
             <body name="NECK_Y_S" pos="-0.003 0 0.453">
               <inertial pos="0 0 -0.05" mass="0.5" diaginertia="0.000729167 0.000729167 0.000625" />
@@ -334,6 +368,10 @@
                     <joint name="R_ELBOW_P" axis="0 1 0" range="-2.53073 0" armature="0.1054" class="jvrc1" />
                     <geom class="collision" quat="0.707105 0 0 0.707108" mesh="R_ELBOW_P_col" />
                     <geom class="visual" quat="0.707105 0 0 0.707108" mesh="R_ELBOW_P_vis" material="ELBOW_P" />
+                    <geom condim="3" group="1" type="box" size="0.06 0.04 0.01" rgba="0.2 0.3 0.5 1"
+                          pos="-0.05975397769348206 0 -0.0720193897773116" euler="0 1.5708 0" />
+                    <site name="right_elbow_tactile_sensor" type="box" size="0.001 0.001 0.001"
+                          pos="-0.06975397769348207 0 -0.0720193897773116" euler="0 1.5708 0" />
                     <body name="R_ELBOW_Y_S" pos="-0.004 0 -0.239">
                       <inertial pos="0 0 0" mass="1" diaginertia="0.00064 0.00064 0.00064" />
                       <joint name="R_ELBOW_Y" axis="0 0 1" range="-1.91986 1.91986" armature="0.1240" class="jvrc1" />
@@ -552,5 +590,73 @@
     <!-- imu -->
     <gyro name="Accelerometer_gyro" site="imu" />
     <accelerometer name="Accelerometer_accelerometer" site="imu" />
+
+    <!-- <plugin name="tactile_sensor" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="back_tactile_sensor"> -->
+    <!--   <config key="sensor_nums" value="10 10"/> -->
+    <!--   <config key="sensor_interval" value="0.02"/> -->
+    <!--   <config key="surface_radius" value="0.0"/> -->
+    <!--   <config key="is_hex_grid" value="true"/> -->
+    <!--   <config key="frame_id" value="real/jvrc1_back_tactile_sensor"/> -->
+    <!--   <config key="topic_name" value="/mujoco/tactile_sensor"/> -->
+    <!--   <config key="publish_rate" value="10"/> -->
+    <!-- </plugin> -->
+
+    <plugin name="tactile_sensor" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="right_elbow_tactile_sensor">
+      <config key="sensor_nums" value="6 4"/>
+      <config key="sensor_interval" value="0.02"/>
+      <config key="surface_radius" value="0.0"/>
+      <config key="is_hex_grid" value="true"/>
+      <config key="frame_id" value="real/jvrc1_right_elbow_tactile_sensor"/>
+      <config key="topic_name" value="/mujoco/tactile_sensor"/>
+      <config key="publish_rate" value="10"/>
+    </plugin>
+
+    <!-- <plugin name="tactile_sensor" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="left_knee_tactile_sensor"> -->
+    <!--   <config key="sensor_nums" value="6 6"/> -->
+    <!--   <config key="sensor_interval" value="0.016"/> -->
+    <!--   <config key="surface_radius" value="0.0"/> -->
+    <!--   <config key="is_hex_grid" value="true"/> -->
+    <!--   <config key="frame_id" value="real/jvrc1_left_knee_tactile_sensor"/> -->
+    <!--   <config key="topic_name" value="/mujoco/tactile_sensor"/> -->
+    <!--   <config key="publish_rate" value="30"/> -->
+    <!-- </plugin> -->
+
+    <!-- <plugin name="tactile_sensor_left_thigh" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="left_thigh_tactile_sensor"> -->
+    <!--   <config key="sensor_nums" value="6 4"/> -->
+    <!--   <config key="sensor_interval" value="0.02"/> -->
+    <!--   <config key="surface_radius" value="0.0"/> -->
+    <!--   <config key="is_hex_grid" value="true"/> -->
+    <!--   <config key="frame_id" value="real/jvrc1_left_thigh_tactile_sensor"/> -->
+    <!--   <config key="topic_name" value="/mujoco/tactile_sensor/left"/> -->
+    <!--   <config key="publish_rate" value="10"/> -->
+    <!-- </plugin> -->
+    <!-- <plugin name="tactile_sensor_right_thigh" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="right_thigh_tactile_sensor"> -->
+    <!--   <config key="sensor_nums" value="6 4"/> -->
+    <!--   <config key="sensor_interval" value="0.02"/> -->
+    <!--   <config key="surface_radius" value="0.0"/> -->
+    <!--   <config key="is_hex_grid" value="true"/> -->
+    <!--   <config key="frame_id" value="real/jvrc1_right_thigh_tactile_sensor"/> -->
+    <!--   <config key="topic_name" value="/mujoco/tactile_sensor/right"/> -->
+    <!--   <config key="publish_rate" value="10"/> -->
+    <!-- </plugin> -->
+
+    <!-- <plugin name="tactile_sensor_left_foot" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="left_foot_tactile_sensor"> -->
+    <!--   <config key="sensor_nums" value="12 5"/> -->
+    <!--   <config key="sensor_interval" value="0.016"/> -->
+    <!--   <config key="surface_radius" value="0.0"/> -->
+    <!--   <config key="is_hex_grid" value="true"/> -->
+    <!--   <config key="frame_id" value="real/jvrc1_left_foot_tactile_sensor"/> -->
+    <!--   <config key="topic_name" value="/mujoco/tactile_sensor/left"/> -->
+    <!--   <config key="publish_rate" value="30"/> -->
+    <!-- </plugin> -->
+    <!-- <plugin name="tactile_sensor_right_foot" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="right_foot_tactile_sensor"> -->
+    <!--   <config key="sensor_nums" value="12 5"/> -->
+    <!--   <config key="sensor_interval" value="0.016"/> -->
+    <!--   <config key="surface_radius" value="0.0"/> -->
+    <!--   <config key="is_hex_grid" value="true"/> -->
+    <!--   <config key="frame_id" value="real/jvrc1_right_foot_tactile_sensor"/> -->
+    <!--   <config key="topic_name" value="/mujoco/tactile_sensor/right"/> -->
+    <!--   <config key="publish_rate" value="30"/> -->
+    <!-- </plugin> -->
   </sensor>
 </mujoco>
