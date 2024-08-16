@@ -233,11 +233,11 @@
             <joint name="R_HIP_Y" axis="0 0 1" range="-0.523599 0.785398" armature="0.1237" class="jvrc1" />
             <geom class="collision" quat="0.707105 0 0 0.707108" mesh="R_HIP_Y_col" />
             <geom class="visual" quat="0.707105 0 0 0.707108" mesh="R_HIP_Y_vis" material="HIP_Y" />
-            <geom condim="3" group="1" type="box" size="0.06 0.04 0.01" rgba="0.2 0.3 0.5 1"
-                  pos="-0.0577307381928566 0 -0.20450757563611333"
+            <geom condim="3" group="1" type="box" size="0.09 0.04 0.01" rgba="0.2 0.3 0.5 1"
+                  pos="-0.0577307381928566 0 -0.17450757563611333"
                   euler="0 1.5242809442976415 0" />
             <site name="right_thigh_tactile_sensor" type="box" size="0.001 0.001 0.001"
-                  pos="-0.0677307381928566 0 -0.20450757563611333"
+                  pos="-0.0677307381928566 0 -0.17450757563611333"
                   euler="0 1.5242809442976415 0" />
             <body name="R_KNEE_S" pos="-0.02 0 -0.389">
               <inertial pos="0.04 0 -0.16" quat="0.707107 0 0 0.707107" mass="3" diaginertia="0.034525 0.031925 0.00865" />
@@ -278,11 +278,11 @@
             <joint name="L_HIP_Y" axis="0 0 1" range="-0.785398 0.523599" armature="0.1237" class="jvrc1" />
             <geom class="collision" quat="0.707105 0 0 0.707108" mesh="L_HIP_Y_col" />
             <geom class="visual" quat="0.707105 0 0 0.707108" mesh="L_HIP_Y_vis" material="HIP_Y" />
-            <geom condim="3" group="1" type="box" size="0.06 0.04 0.01" rgba="0.2 0.3 0.5 1"
-                  pos="-0.0577307381928566 0 -0.20450757563611333"
+            <geom condim="3" group="1" type="box" size="0.09 0.04 0.01" rgba="0.2 0.3 0.5 1"
+                  pos="-0.0577307381928566 0 -0.17450757563611333"
                   euler="0 1.5242809442976415 0" />
             <site name="left_thigh_tactile_sensor" type="box" size="0.001 0.001 0.001"
-                  pos="-0.0677307381928566 0 -0.20450757563611333"
+                  pos="-0.0677307381928566 0 -0.17450757563611333"
                   euler="0 1.5242809442976415 0" />
             <body name="L_KNEE_S" pos="-0.02 0 -0.389">
               <inertial pos="0.04 0 -0.16" quat="0.707107 0 0 0.707107" mass="3" diaginertia="0.034525 0.031925 0.00865" />
@@ -601,15 +601,15 @@
     <!--   <config key="publish_rate" value="10"/> -->
     <!-- </plugin> -->
 
-    <plugin name="tactile_sensor" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="right_elbow_tactile_sensor">
-      <config key="sensor_nums" value="6 4"/>
-      <config key="sensor_interval" value="0.02"/>
-      <config key="surface_radius" value="0.0"/>
-      <config key="is_hex_grid" value="true"/>
-      <config key="frame_id" value="real/jvrc1_right_elbow_tactile_sensor"/>
-      <config key="topic_name" value="/mujoco/tactile_sensor"/>
-      <config key="publish_rate" value="10"/>
-    </plugin>
+    <!-- <plugin name="tactile_sensor" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="right_elbow_tactile_sensor"> -->
+    <!--   <config key="sensor_nums" value="6 4"/> -->
+    <!--   <config key="sensor_interval" value="0.02"/> -->
+    <!--   <config key="surface_radius" value="0.0"/> -->
+    <!--   <config key="is_hex_grid" value="true"/> -->
+    <!--   <config key="frame_id" value="real/jvrc1_right_elbow_tactile_sensor"/> -->
+    <!--   <config key="topic_name" value="/mujoco/tactile_sensor"/> -->
+    <!--   <config key="publish_rate" value="10"/> -->
+    <!-- </plugin> -->
 
     <!-- <plugin name="tactile_sensor" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="left_knee_tactile_sensor"> -->
     <!--   <config key="sensor_nums" value="6 6"/> -->
@@ -621,24 +621,24 @@
     <!--   <config key="publish_rate" value="30"/> -->
     <!-- </plugin> -->
 
-    <!-- <plugin name="tactile_sensor_left_thigh" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="left_thigh_tactile_sensor"> -->
-    <!--   <config key="sensor_nums" value="6 4"/> -->
-    <!--   <config key="sensor_interval" value="0.02"/> -->
-    <!--   <config key="surface_radius" value="0.0"/> -->
-    <!--   <config key="is_hex_grid" value="true"/> -->
-    <!--   <config key="frame_id" value="real/jvrc1_left_thigh_tactile_sensor"/> -->
-    <!--   <config key="topic_name" value="/mujoco/tactile_sensor/left"/> -->
-    <!--   <config key="publish_rate" value="10"/> -->
-    <!-- </plugin> -->
-    <!-- <plugin name="tactile_sensor_right_thigh" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="right_thigh_tactile_sensor"> -->
-    <!--   <config key="sensor_nums" value="6 4"/> -->
-    <!--   <config key="sensor_interval" value="0.02"/> -->
-    <!--   <config key="surface_radius" value="0.0"/> -->
-    <!--   <config key="is_hex_grid" value="true"/> -->
-    <!--   <config key="frame_id" value="real/jvrc1_right_thigh_tactile_sensor"/> -->
-    <!--   <config key="topic_name" value="/mujoco/tactile_sensor/right"/> -->
-    <!--   <config key="publish_rate" value="10"/> -->
-    <!-- </plugin> -->
+    <plugin name="tactile_sensor_left_thigh" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="left_thigh_tactile_sensor">
+      <config key="sensor_nums" value="9 4"/>
+      <config key="sensor_interval" value="0.02"/>
+      <config key="surface_radius" value="0.0"/>
+      <config key="is_hex_grid" value="true"/>
+      <config key="frame_id" value="real/jvrc1_left_thigh_tactile_sensor"/>
+      <config key="topic_name" value="/mujoco/tactile_sensor/left"/>
+      <config key="publish_rate" value="10"/>
+    </plugin>
+    <plugin name="tactile_sensor_right_thigh" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="right_thigh_tactile_sensor">
+      <config key="sensor_nums" value="9 4"/>
+      <config key="sensor_interval" value="0.02"/>
+      <config key="surface_radius" value="0.0"/>
+      <config key="is_hex_grid" value="true"/>
+      <config key="frame_id" value="real/jvrc1_right_thigh_tactile_sensor"/>
+      <config key="topic_name" value="/mujoco/tactile_sensor/right"/>
+      <config key="publish_rate" value="10"/>
+    </plugin>
 
     <!-- <plugin name="tactile_sensor_left_foot" plugin="MujocoTactileSensorRosPlugin" objtype="site" objname="left_foot_tactile_sensor"> -->
     <!--   <config key="sensor_nums" value="12 5"/> -->
